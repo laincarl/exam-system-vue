@@ -6,20 +6,20 @@
       </div>
     </router-link>
     <div class="flex-space"></div>
-    <div v-if="login">
+    <div v-if="userAuth">
       <Popover trigger="click">
         <div style="width:190px">
           <div style="text-align: center;">
-            <img class="head_icon_big" src="./default.png" alt="" />
-            <div style="margin-top: 10px">{{real_name}}</div>
-            <div style="font-size: 10px;marginTop: 3px">{{role}}</div>
+            <img class="head_icon_big" :src="userInfo.url" alt="" />
+            <div style="margin-top: 10px">{{userInfo.real_name}}</div>
+            <div style="font-size: 10px;marginTop: 3px">{{userInfo.role}}</div>
           </div>
           <div class="pop_button_container">
             <Button size="small">个人中心</Button>
             <Button size="small" type="primary">退出登录</Button>
           </div>
         </div>
-        <img slot="reference" class="head_icon" src="./default.png" alt="" />
+        <img slot="reference" class="head_icon" :src="userInfo.url" alt="" />
       </Popover>
     </div>
     <div v-else>
@@ -32,6 +32,7 @@
 
 <script>
 import { Popover, Button } from 'element-ui';
+import { mapState } from 'vuex';
 
 export default {
   name: 'MainHeader',
@@ -39,6 +40,7 @@ export default {
     Popover,
     Button,
   },
+  computed: mapState(['userAuth', 'userInfo']),
   data() {
     return {
       login: false,
@@ -46,6 +48,7 @@ export default {
       role: '教师',
     };
   },
+
 };
 </script>
 

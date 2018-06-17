@@ -8,10 +8,26 @@
 <script>
 import MainHeader from '@/containers/MainHeader';
 import '@/assets/iconfont/iconfont.css';
+import axios from '@/utils/axios';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'App',
   components: { MainHeader },
+  methods: {
+    ...mapActions([
+      'login', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
+    ]),
+  },
+  mounted() {
+    axios.get('/user/info').then((userInfo) => {
+      if (userInfo) {
+        this.login(userInfo);
+      }
+    }).catch((error) => {
+      console.log(error);
+    });
+  },
 };
 </script>
 

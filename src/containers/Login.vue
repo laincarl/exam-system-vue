@@ -10,7 +10,7 @@
       <FormItem label="密码" prop="password" :rules="[
       { required: true, message: '请输入密码', trigger: 'blur' },
     ]">
-        <Input type="password"  v-model="form.password" />
+        <Input type="password" v-model="form.password" />
       </FormItem>
       <FormItem>
         <Button class="login_button" type="primary" @click="onSubmit">登录</Button>
@@ -23,10 +23,11 @@
 </template>
 
 <script>
-/*eslint-disable */
+
 import { Input, Form, FormItem, Button, Message } from 'element-ui';
 import Cookies from 'js-cookie';
 import axios from '@/utils/axios';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'Login',
@@ -39,22 +40,30 @@ export default {
       },
     };
   },
+  computed: mapState(['userAuth', 'userInfo']),
   methods: {
     onSubmit() {
-      this.$router.push('/');
-      // axios.post('/user/accesstoken', this.form).then((data) => {
-      //   console.log(data);
-      //   Cookies.set('token', data.token);
-      //   Message.success('登录成功');
-      // }).catch((error) => {
-      //   console.log(error);
-      // });
+      axios
+        .post('/user/accesstoken', this.form)
+        .then((data) => {
+          console.log(data);
+          this.login(data);
+          Cookies.set('token', data.token);
+          Message.success('登录成功');
+          this.$router.push('/');
+          console.log(this.userAuth, this.userInfo);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
+    ...mapActions([
+      'login', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
+    ]),
   },
 };
 </script>
-
-<style scoped>
+<style lang="less" scoped>
 .login_container {
   position: absolute;
   left: 50%;
@@ -80,3 +89,4 @@ export default {
   width: 100%;
 }
 </style>
+
