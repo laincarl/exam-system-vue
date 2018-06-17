@@ -1,6 +1,6 @@
-# my-project
+# exam-system-vue
 
-> A Vue.js project
+> 使用 Vue.js 编写的在线考试系统
 
 ## Build Setup
 
