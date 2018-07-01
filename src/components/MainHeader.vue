@@ -6,6 +6,11 @@
       </div>
     </router-link>
     <div class="flex-space"></div>
+    <div v-if="userAuth&&['admin', 'teacher'].includes(userInfo.role)">
+      <router-link to="/manage">
+        <div class="header_btn">管理</div>
+      </router-link>
+    </div>
     <div v-if="userAuth">
       <Popover trigger="click">
         <div style="width:190px">
@@ -48,7 +53,6 @@ export default {
       role: '教师',
     };
   },
-
 };
 </script>
 
@@ -72,6 +76,7 @@ export default {
   height: 100%;
   width: 80px;
   margin-left: 20px;
+  margin-right: 20px;
   text-align: center;
   line-height: 50px;
 }

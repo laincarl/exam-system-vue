@@ -51,6 +51,7 @@ export default {
           Cookies.set('token', data.token);
           Message.success('登录成功');
           this.$router.push('/');
+          window.location.reload();
           console.log(this.userAuth, this.userInfo);
         })
         .catch((error) => {

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import MainHeader from '@/containers/MainHeader';
+import MainHeader from '@/components/MainHeader';
 import '@/assets/iconfont/iconfont.css';
 import axios from '@/utils/axios';
 import { mapActions } from 'vuex';
