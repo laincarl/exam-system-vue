@@ -45,7 +45,7 @@ export default {
     Popover,
     Button,
   },
-  computed: mapState(['userAuth', 'userInfo']),
+  computed: mapState({ userAuth: state => state.app.userAuth,userInfo:state => state.app.userInfo}),
   data() {
     return {
       login: false,

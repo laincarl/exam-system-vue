@@ -5,6 +5,7 @@ import { Loading } from 'element-ui';
 import App from './App';
 import router from './router';
 import store from './store';
+import './permission';
 
 Vue.use(Loading.directive);
 Vue.prototype.$loading = Loading.service;
